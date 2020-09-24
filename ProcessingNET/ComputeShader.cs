@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace ProcessingNET
 {
-    public class ComputeShader
+    public class ComputeShader : ShaderBase
     {
-        private int programId;
-        private Dictionary<string, int> uniformDictionary;
-
-        public ComputeShader(string source)
+        public static ComputeShader FromFile(App app, string path)
         {
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Compute Shader not found at specified path.", path);
+
+            return new ComputeShader(app, File.ReadAllText(path));
+        }
+
+        public static ComputeShader FromSource(App app, string source)
+        {
+            return new ComputeShader(app, source);
+        }
+
+        private ComputeShader(App app, string source)
+        {
+            App = app;
+
             int computeShader = GL.CreateShader(ShaderType.ComputeShader);
             GL.ShaderSource(computeShader, source);
             GL.CompileShader(computeShader);
@@ -23,166 +36,22 @@ namespace ProcessingNET
                 throw new ShaderCompilationException(infoLog);
             }
 
-            programId = GL.CreateProgram();
-            GL.AttachShader(programId, computeShader);
-            GL.LinkProgram(programId);
-            GL.GetProgram(programId, GetProgramParameterName.LinkStatus, out int linkStatus);
+            ProgramId = GL.CreateProgram();
+            GL.AttachShader(ProgramId, computeShader);
+            GL.LinkProgram(ProgramId);
+            GL.GetProgram(ProgramId, GetProgramParameterName.LinkStatus, out int linkStatus);
             if (linkStatus != 1)
             {
-                string infoLog = GL.GetProgramInfoLog(programId);
+                string infoLog = GL.GetProgramInfoLog(ProgramId);
                 throw new ShaderCompilationException(infoLog);
             }
 
             GL.DeleteShader(computeShader);
-
-            uniformDictionary = new Dictionary<string, int>();
         }
 
-        /// <summary>
-        /// Use this shader for computing.
-        /// </summary>
-        public void Use()
+        public static void Dispatch(int workGroupAmountX, int workGroupAmountY, int workGroupAmountZ)
         {
-            GL.UseProgram(programId);
+            GL.DispatchCompute(workGroupAmountX, workGroupAmountY, workGroupAmountZ);
         }
-
-        /// <summary>
-        /// Set uniform bool value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetBool(string uniformName, bool value)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.Uniform1(uniformDictionary[uniformName], value ? 1 : 0);
-        }
-
-        /// <summary>
-        /// Set uniform float value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetFloat(string uniformName, float value)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.Uniform1(uniformDictionary[uniformName], value);
-        }
-
-        /// <summary>
-        /// Set uniform int value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetInteger(string uniformName, int value)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.Uniform1(uniformDictionary[uniformName], value);
-        }
-
-        /// <summary>
-        /// Set uniform Vector3 value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetVector3(string uniformName, Vector3 value)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.Uniform3(uniformDictionary[uniformName], value);
-        }
-
-        /// <summary>
-        /// Set uniform Vector2 value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetVector2(string uniformName, Vector2 value)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.Uniform2(uniformDictionary[uniformName], value);
-        }
-
-        /// <summary>
-        /// Set uniform Matrix4 value.
-        /// </summary>
-        /// <param name="uniformName">Name of the uniform</param>
-        /// <param name="value">Value that the uniform should be set to</param>
-        public void SetMatrix4(string uniformName, Matrix4 value, bool transpose = false)
-        {
-            if (!uniformDictionary.ContainsKey(uniformName))
-            {
-                int location = GL.GetUniformLocation(programId, uniformName);
-                if (location != -1)
-                {
-                    uniformDictionary.Add(uniformName, location);
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            GL.UniformMatrix4(uniformDictionary[uniformName], transpose, ref value);
-        }
-
     }
 }

@@ -32,13 +32,12 @@ namespace TestApp
 
         protected override void Start()
         {
-            testShader = Shader.FromFiles("Shaders/testShader.vert", "Shaders/testShader.frag");
+            testShader = Shader.FromFiles(this, "Shaders/testShader.vert", "Shaders/testShader.frag");
         }
 
         protected override void Update(float deltaTime)
         {
             currentFps = (int) (1.0f / deltaTime);
-            Window.Title = "Current FPS: " + currentFps;
             time += deltaTime;
 
 
@@ -89,12 +88,10 @@ namespace TestApp
         {
             ClearBackground(Color4.Black);
 
-            testShader.Use();
-            GL.GetFloat(GetPName.ProjectionMatrix, out Matrix4 projMatrix);
-            testShader.SetMatrix4("projection", projMatrix);
-            DrawCircle(pos, size);
+            //testShader.Use();
+            //DrawCircle(pos, size);
 
-            DrawString("Hello World! FPS:             " + currentFps, 0, 0, 16 + 200 * (MathF.Sin(time) + 1.0f) * 0.5f);
+            DrawString("FPS: " + currentFps, 0, Settings.Window.Height - 16, 16);
         }
     }
 }

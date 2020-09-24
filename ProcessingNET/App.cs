@@ -87,19 +87,23 @@ namespace ProcessingNET
 
         private void OnRenderFrame(FrameEventArgs e)
         {
-            Matrix4 projectionMatrix = Matrix4.CreateOrthographicOffCenter(0, Settings.Window.Width, 0, Settings.Window.Height, 0f, 1f);
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadMatrix(ref projectionMatrix);
             Render();
             Window.SwapBuffers();
         }
 
         private void OnLoad()
         {
-            GenerateFontAtlas();
+            GenerateDefaultFontAtlas();
 
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            Matrix4 projection = Matrix4.CreateOrthographicOffCenter(0, Settings.Window.Width, 0, Settings.Window.Height, 0f, 1f);
+            ProjectionMatrix = projection;
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref projection);
+
+            Color = Color4.White;
 
             Start();
         }

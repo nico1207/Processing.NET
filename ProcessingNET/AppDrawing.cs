@@ -8,6 +8,9 @@ namespace ProcessingNET
 {
     public abstract partial class App
     {
+        public Matrix4 ProjectionMatrix { get; set; }
+        public Color4 Color { get; set; }
+
         /// <summary>
         /// Clear screen with background color.
         /// </summary>

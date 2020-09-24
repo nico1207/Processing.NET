@@ -118,22 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DefaultShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DefaultShader.vert;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Helvetica" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Helvetica.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SDFCompute" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SDFCompute.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SDFDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SDFDistance.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SDFFragShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SDFFragShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SDFSetupBuffer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SDFSetupBuffer.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SDFVertShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SDFVertShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TextShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TextShader.frag;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

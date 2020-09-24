@@ -63,6 +63,16 @@ namespace ProcessingNET.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] DefaultShader {
+            get {
+                object obj = ResourceManager.GetObject("DefaultShader", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Helvetica {
             get {
                 object obj = ResourceManager.GetObject("Helvetica", resourceCulture);
@@ -73,49 +83,9 @@ namespace ProcessingNET.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] SDFCompute {
+        internal static byte[] TextShader {
             get {
-                object obj = ResourceManager.GetObject("SDFCompute", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SDFDistance {
-            get {
-                object obj = ResourceManager.GetObject("SDFDistance", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SDFFragShader {
-            get {
-                object obj = ResourceManager.GetObject("SDFFragShader", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SDFSetupBuffer {
-            get {
-                object obj = ResourceManager.GetObject("SDFSetupBuffer", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] SDFVertShader {
-            get {
-                object obj = ResourceManager.GetObject("SDFVertShader", resourceCulture);
+                object obj = ResourceManager.GetObject("TextShader", resourceCulture);
                 return ((byte[])(obj));
             }
         }
