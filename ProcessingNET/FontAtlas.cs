@@ -67,8 +67,6 @@ namespace ProcessingNET
                 }
             });
 
-            image.Save("atlas.png", new PngEncoder());
-
             image.TryGetSinglePixelSpan(out Span<A8> pixels);
 
             TextureId = GL.GenTexture();
