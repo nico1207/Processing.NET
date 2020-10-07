@@ -47,6 +47,12 @@ namespace ProcessingNET
         {
             App = app;
 
+            // Strip byte order marks off shaders, which cause compilation errors on Linux
+            if(vertexSource.StartsWith('\ufeff'))
+                vertexSource = vertexSource.Substring(1);
+            if(fragmentSource.StartsWith('\ufeff'))
+                fragmentSource = fragmentSource.Substring(1);
+
             int vertexShader = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShader, vertexSource);
             GL.CompileShader(vertexShader);
