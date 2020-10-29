@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace ProcessingNET
 {
@@ -19,7 +20,7 @@ namespace ProcessingNET
         /// </summary>
         /// <param name="key">The key that should be checked</param>
         /// <returns></returns>
-        protected bool IsKeyDown(Key key) => Window.IsKeyDown(key);
+        protected bool IsKeyDown(Keys key) => Window.IsKeyDown(key);
 
         /// <summary>
         /// Returns whether the specified mouse button is currently pressed.

@@ -43,22 +43,22 @@ namespace TestApp
 
             //pos += spd * deltaTime;
 
-            if (Window.KeyboardState[Key.W])
+            if (Window.KeyboardState[Keys.W])
             {
                 pos.Y += speed * deltaTime;
             }
 
-            if (Window.KeyboardState[Key.A])
+            if (Window.KeyboardState[Keys.A])
             {
                 pos.X -= speed * deltaTime;
             }
 
-            if (Window.KeyboardState[Key.S])
+            if (Window.KeyboardState[Keys.S])
             {
                 pos.Y -= speed * deltaTime;
             }
 
-            if (Window.KeyboardState[Key.D])
+            if (Window.KeyboardState[Keys.D])
             {
                 pos.X += speed * deltaTime;
             }
